@@ -1,15 +1,34 @@
 pipeline {
+    agent any
+
     stages {
-        stage('Build Docker') {
-            // build the docker image from the source code using the BUILD_ID parameter in image name
-            sh "sudo docker build -t flask-app ."
+        stage('clone from github'){
+            steps{
+                dir("CI_Jenkins"){
+                    echo 'clone git repo'
+                    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/krys92/CI-Jenkins.git'
+                    bat 'dir'
+                }
+            }
         }
-        stage("run docker container"){
-            sh "sudo docker run -p 8000:8000 --name flask-app -d flask-app "
-        }
-        stage('test') {
+        stage('build from github') {
             steps {
-                sh 'python test.py'
+                dir("CI_Jenkins"){
+                    echo 'pip install -r requirements.txt'
+                    bat 'pip install -r requirements.txt'
+                    bat 'python app.py'
+                }
+            }
+        }
+        stage('test from github') {
+            steps {
+                echo 'running test1'
+                echo 'running test2'
+            }
+        }
+        stage('deploying from github'){
+            steps{
+                echo "deployement"
             }
         }
     }
