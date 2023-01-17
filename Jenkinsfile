@@ -6,7 +6,7 @@ pipeline {
             steps{
                 dir("CI_Jenkins"){
                     echo 'clone git repo'
-                    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/krys92/CI-Jenkins.git'
+                    git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Atheros7/JenkinsTP.git'
                     bat 'dir'
                 }
             }
