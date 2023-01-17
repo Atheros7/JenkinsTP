@@ -1,18 +1,14 @@
 pipeline {
-    agent any
-
+    agent { docker { image 'python:3.7.2' } }
     stages {
-        stage('build from github') {
+        stage('build') {
             steps {
-                echo 'fetch code'
-                echo 'build code'
-                echo 'test Jean Devise'
+                sh 'pip install flask
             }
         }
-        stage('test from github') {
+        stage('test') {
             steps {
-                echo 'running test1'
-                echo 'running test2'
+                sh 'python test.py'
             }
         }
     }
