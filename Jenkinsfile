@@ -36,8 +36,8 @@ pipeline {
         stage('deploying from github'){
             steps{
                 dir("CI_Jenkins"){
-                    bat 'docker build -t app .'
-                    bat 'docker run -dp 5000:5000 app'
+                    bat 'docker image build -t flask_docker .'
+                    bat 'docker run -p 5000:5000 -d flask_docker'
                 }
             }
         }
