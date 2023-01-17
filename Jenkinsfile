@@ -14,8 +14,8 @@ pipeline {
         stage('build from github') {
             steps {
                 dir("CI_Jenkins"){
-                    echo 'pip3 install -r requirements.txt'
-                    bat 'pip3 install -r requirements.txt'
+                    echo 'pip install -r requirements.txt'
+                    bat 'C:\Users\jeanv\AppData\Local\Programs\Python\Python310\Scripts\pip install -r requirements.txt'
                     bat 'python app.py'
                 }
             }
