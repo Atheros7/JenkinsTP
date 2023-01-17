@@ -15,7 +15,7 @@ pipeline {
             steps {
                 dir("CI_Jenkins"){
                     echo 'pip install -r requirements.txt'
-                    bat 'C:\Users\jeanv\AppData\Local\Programs\Python\Python310\Scripts\pip install -r requirements.txt'
+                    bat 'C:/Users/jeanv/AppData/Local/Programs/Python/Python310/Scripts/pip install -r requirements.txt'
                     bat 'python app.py'
                 }
             }
