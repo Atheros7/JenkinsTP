@@ -1,6 +1,12 @@
 pipeline {
     agent any
     
+    environment {
+        def pip = "C:/Users/jeanv/AppData/Local/Programs/Python/Python310/Scripts/pip"
+        def python = "C:/Users/jeanv/AppData/Local/Programs/Python/Python310/python"
+         
+    }
+    
     stages {
         stage('clone from github'){
             steps{
@@ -15,20 +21,24 @@ pipeline {
             steps {
                 dir("CI_Jenkins"){
                     echo 'pip install -r requirements.txt'
-                    bat 'C:/Users/jeanv/AppData/Local/Programs/Python/Python310/Scripts/pip install -r requirements.txt'
-                    bat 'C:/Users/jeanv/AppData/Local/Programs/Python/Python310/python app.py'
+                    bat "${pip} install -r requirements.txt"
                 }
             }
         }
         stage('test from github') {
             steps {
-                echo 'running test1'
-                echo 'running test2'
+                dir("CI_Jenkins"){
+                    echo "pyhton -m unittest"
+                    bat "${python} -m unittest"
+                }
             }
         }
         stage('deploying from github'){
             steps{
-                echo "deployement"
+                dir("CI_Jenkins"){
+                    bat 'docker build -t app .'
+                    bat 'docker run -dp 3001:3000 app'
+                }
             }
         }
     }
