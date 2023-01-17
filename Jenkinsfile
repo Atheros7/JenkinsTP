@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'fetch code'
                 echo 'build code'
-                echo 'test webhook'
+                echo 'test Jean Devise'
             }
         }
         stage('test from github') {
